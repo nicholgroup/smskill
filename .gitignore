@@ -1,0 +1,66 @@
+# ============================================================
+# sm-skill .gitignore
+# ============================================================
+# This repo holds the Claude Code skill files (SKILL.md, README,
+# wiki references, SM source tree, examples). It is NOT meant to
+# hold experiment data. The patterns below keep accidental scan
+# outputs, editor noise, and OS junk out of version control.
+# ============================================================
+
+# ---- Special Measure scan outputs ---------------------------
+# smrun + smnext save data as sm_<label>_NNNN.mat in the cwd.
+# If someone runs the mock qdot example from inside this repo,
+# the .mat files land here -- keep them out of the skill repo.
+sm_*.mat
+sm_*.fig
+sm_*.png
+sm_*.jpg
+
+# ---- MATLAB ------------------------------------------------
+*.asv          # editor autosave (e.g. sm_Callback.asv)
+*.m~           # backup
+*.autosave
+*.mex*         # compiled MEX (per-platform)
+slprj/         # Simulink project cache
+octave-workspace
+
+# ---- Editors / IDEs ----------------------------------------
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# ---- Claude Code -------------------------------------------
+.claude/settings.local.json
+.claude/cache/
+.claude/projects/
+
+# ---- Python (analysis side scripts) ------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ---- Logs / temp -------------------------------------------
+*.log
+*.tmp
+*.bak
+~$*            # MS Office lock files
+
+# ---- OS junk -----------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ---- Box Sync side files -----------------------------------
+.boxignore
+*.boxnote
