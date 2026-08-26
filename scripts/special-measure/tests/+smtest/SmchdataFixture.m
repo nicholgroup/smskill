@@ -19,6 +19,21 @@ classdef SmchdataFixture
 
     methods (Static)
 
+        function addSrcPaths()
+        % Put every src/ directory the test suite needs on the MATLAB path.
+        %
+        % This is the single place source paths are registered — individual
+        % test files must not add their own. Tests that need no SM globals
+        % (pure numerics, e.g. the fitting wrappers) can call this directly
+        % instead of initWithQdot.
+            repoRoot = fullfile(fileparts(mfilename('fullpath')), '..', '..');
+            addpath(fullfile(repoRoot, 'examples'));
+            addpath(fullfile(repoRoot, 'src', 'sm'));
+            addpath(fullfile(repoRoot, 'src', 'drivers'));
+            addpath(fullfile(repoRoot, 'src', 'utils', 'toolbox'));
+            addpath(fullfile(repoRoot, 'src', 'utils', 'analysis'));
+        end
+
         function initWithQdot()
         % Initialize smdata and register the smcqdot mock instrument.
         % smcqdot_setup() correctly populates datadim, type, and channels.
@@ -30,14 +45,16 @@ classdef SmchdataFixture
             smdata.configfn = [];
             smdata.chanvals = [];
 
-            % Make sure examples/ (where smcqdot_setup lives) is on the path.
-            repoRoot = fullfile(fileparts(mfilename('fullpath')), '..', '..');
-            addpath(fullfile(repoRoot, 'examples'));
-            addpath(fullfile(repoRoot, 'sm'));
-            addpath(fullfile(repoRoot, 'channels'));
+            smtest.SmchdataFixture.addSrcPaths();
 
             smcqdot_setup();
             sminitdisp();
+
+            % Close the channel-display figure so smdispchan's drawnow
+            % does not block during automated tests.
+            if ishandle(999)
+                close(999);
+            end
         end
 
         function wipe()
