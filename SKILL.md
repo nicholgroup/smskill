@@ -22,6 +22,7 @@ Special Measure is a MATLAB measurement framework. Two things drive everything:
 
 Resources in this skill:
 
+- `scripts/update-special-measure.ps1` - maintainer utility for refreshing the bundled source; run it only when a user explicitly asks to update the skill's Special Measure snapshot.
 - `references/special-measure.wiki/` — full upstream wiki (read these before answering deep questions; do not paraphrase from memory).
 - `scripts/special-measure/src/` — the MATLAB source: `sm/` (core), `drivers/` (smc*.m), `utils/{plotting,analysis}/`.
 - `scripts/special-measure/examples/` — runnable mock quantum-dot sandbox (no hardware required).

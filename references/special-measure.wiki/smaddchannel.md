@@ -1,0 +1,1 @@
+Add new channel to the smdata.channels struct. You must give an instrument and a channel (found in the inst.channels list), along with a name for the channel. If the rangeramp (FIXME) is not given, it defaults to [-Inf Inf Inf 1]; 

@@ -116,6 +116,29 @@ sm-skill/
 
 If you want to read the SM wiki directly, [`references/special-measure.wiki/Home.md`](references/special-measure.wiki/Home.md) is the entry point. [`Overview.md`](references/special-measure.wiki/Overview.md) is the function index.
 
+## Updating the bundled Special Measure source
+
+The source under `scripts/special-measure/` is vendored into this repository as ordinary files. This is intentional: anyone who clones `smskill` receives the full source tree without initializing submodules.
+
+From the repository root, update it from [`nicholgroup/special-measure`](https://github.com/nicholgroup/special-measure) with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\update-special-measure.ps1
+```
+
+With PowerShell 7 on Windows, macOS, or Linux, run `pwsh -File ./scripts/update-special-measure.ps1`.
+
+The updater downloads the latest `master`, replaces only `scripts/special-measure/`, and refuses to run if that directory has local changes. After it finishes, review and publish the update:
+
+```powershell
+git diff --stat
+git add -f -- scripts/special-measure
+git commit -m 'Update bundled Special Measure'
+git push origin master
+```
+
+To pull another branch or tag, pass `-Ref <name>`. Use `-Force` only when you intentionally want to discard local changes under `scripts/special-measure/`.
+
 ---
 
 ## Tips for getting good answers
